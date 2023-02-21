@@ -1,11 +1,11 @@
-#include "main.h"
+#include "main.h"
 /**
  * main - main function
  * _putcahr; prints the string "_putchar" followed bg a new line
  * Return: 0 on success
  */
 
-int main(void)
+int main(void)
 {
 	_putchar('_');
 	_putchar('p');
