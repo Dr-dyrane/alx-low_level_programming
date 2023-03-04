@@ -9,27 +9,25 @@
  */
 char *_strcat(char *dest, char *src)
 {
-        int i, j;
+        char *s = dest; /* save a copy of dest pointer */
 
         /* Find the end of the destination string */
-        i = 0;
-        while (dest[i] != '\0')
+        while (*dest != '\0')
         {
-                i++;
+                dest++;
         }
 
         /* Append the source string to the destination string */
-        j = 0;
-        while (src[j] != '\0')
+        while (*src != '\0')
         {
-                dest[i] = src[j];
-                i++;
-                j++;
+                *dest = *src;
+                dest++;
+                src++;
         }
 
         /* Add the null terminator to the end of the concatenated string */
-        dest[i] = '\0';
+        *dest = '\0';
 
         /* Return a pointer to the concatenated string */
-        return (dest);
+        return (s);
 }
