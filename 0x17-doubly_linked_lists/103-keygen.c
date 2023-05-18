@@ -13,9 +13,10 @@ int main(int argc, char *argv[])
 {
 	unsigned int i, max_char;
 	size_t len, sum;
-	char *lookup = "A-CHRDw87lNS0E9B2TibgpnMVys5XzvtOGJcYLU+4mjW6fxqZeF3Qa1rPhdKIouk";
+	char *lookup;
 	char key[7] = "      ";
 
+	lookup = "A-CHRDw87lNS0E9B2TibgpnMVys5XzvtOGJcYLU+4mjW6fxqZeF3Qa1rPhdKIouk";
 	if (argc != 2)
 	{
 		printf("Correct usage: ./keygen5 username\n");
