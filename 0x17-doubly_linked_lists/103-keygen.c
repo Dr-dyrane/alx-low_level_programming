@@ -3,65 +3,50 @@
 #include <stdlib.h>
 
 /**
- * get_key_character - Calculates a key character based on given parameters.
- * @value: Value to perform XOR operation on.
- * @bitmask: Bitmask to apply after XOR operation.
+ * main - Generate a key depending on a username for crackme5.
+ * @argc: Number of arguments passed.
+ * @argv: Arguments passed to main.
  *
- * Return: Key character.
- */
-char get_key_character(unsigned int value, unsigned int bitmask)
-{
-	char *lookup = "A-CHRDw87lNS0E9B2TibgpnMVys5XzvtOGJcYLU+4mjW6fxqZeF3Qa1rPhdKIouk";
-	return (lookup[(value ^ bitmask) & 63]);
-}
-
-/**
- * main - generate a key depending on a username for crackme5
- * @argc: number of arguments passed
- * @argv: arguments passed to main
- *
- * Return: 0 on success, 1 on error
+ * Return: 0 on success, 1 on error.
  */
 int main(int argc, char *argv[])
 {
-	unsigned int i, b;
-	size_t len, add;
-	char p[7] = "      ";
+	unsigned int i, max_char;
+	size_t len, sum;
+	char *lookup = "A-CHRDw87lNS0E9B2TibgpnMVys5XzvtOGJcYLU+4mjW6fxqZeF3Qa1rPhdKIouk";
+	char key[7] = "      ";
 
 	if (argc != 2)
 	{
 		printf("Correct usage: ./keygen5 username\n");
 		return (1);
 	}
-
 	len = strlen(argv[1]);
-	p[0] = get_key_character(len, 59);
-
-	for (i = 0, add = 0; i < len; i++)
-		add += argv[1][i];
-	p[1] = get_key_character(add, 79);
-
-	for (i = 0, b = 1; i < len; i++)
-		b *= argv[1][i];
-	p[2] = get_key_character(b, 85);
-
-	for (b = argv[1][0], i = 0; i < len; i++)
+	key[0] = lookup[(len ^ 59) & 63];
+	sum = 0;
+	for (i = 0; i < len; i++)
+		sum += argv[1][i];
+	key[1] = lookup[(sum ^ 79) & 63];
+	max_char = 1;
+	for (i = 0; i < len; i++)
+		max_char *= argv[1][i];
+	key[2] = lookup[(max_char ^ 85) & 63];
+	max_char = argv[1][0];
+	for (i = 0; i < len; i++)
 	{
-		if ((char)b <= argv[1][i])
-			b = argv[1][i];
+		if ((char)max_char <= argv[1][i])
+			max_char = argv[1][i];
 	}
-
-	srand(b ^ 14);
-	p[3] = get_key_character(rand(), 63);
-
-	for (b = 0, i = 0; i < len; i++)
-		b += argv[1][i] * argv[1][i];
-	p[4] = get_key_character(b, 239);
-
-	for (b = 0, i = 0; (char)i < argv[1][0]; i++)
-		b = rand();
-	p[5] = get_key_character(b, 229);
-
-	printf("%s\n", p);
+	srand(max_char ^ 14);
+	key[3] = lookup[rand() & 63];
+	sum = 0;
+	for (i = 0; i < len; i++)
+		sum += argv[1][i] * argv[1][i];
+	key[4] = lookup[(sum ^ 239) & 63];
+	max_char = 0;
+	for (i = 0; (char)i < argv[1][0]; i++)
+		max_char = rand();
+	key[5] = lookup[(max_char ^ 229) & 63];
+	printf("%s\n", key);
 	return (0);
 }
