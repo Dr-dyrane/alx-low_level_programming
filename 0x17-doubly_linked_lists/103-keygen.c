@@ -3,117 +3,65 @@
 #include <stdlib.h>
 
 /**
- * xor_operation - Performs XOR operation between two numbers.
- * @a: First number.
- * @b: Second number.
+ * get_key_character - Calculates a key character based on given parameters.
+ * @value: Value to perform XOR operation on.
+ * @bitmask: Bitmask to apply after XOR operation.
  *
- * Return: XOR result.
+ * Return: Key character.
  */
-unsigned int xor_operation(unsigned int a, unsigned int b)
+char get_key_character(unsigned int value, unsigned int bitmask)
 {
-	return (a ^ b);
+	char *lookup = "A-CHRDw87lNS0E9B2TibgpnMVys5XzvtOGJcYLU+4mjW6fxqZeF3Qa1rPhdKIouk";
+	return (lookup[(value ^ bitmask) & 63]);
 }
 
 /**
- * calculate_sum - Calculates the sum of character codes in a string.
- * @str: Input string.
+ * main - generate a key depending on a username for crackme5
+ * @argc: number of arguments passed
+ * @argv: arguments passed to main
  *
- * Return: Sum of character codes.
- */
-size_t calculate_sum(const char *str)
-{
-	size_t sum = 0;
-	size_t len = strlen(str);
-	unsigned int i;
-
-	for (i = 0; i < len; i++)
-	{
-		sum += str[i];
-	}
-
-	return (sum);
-}
-
-/**
- * calculate_product - Calculates the product of character codes in a string.
- * @str: Input string.
- *
- * Return: Product of character codes.
- */
-unsigned int calculate_product(const char *str)
-{
-	unsigned int product = 1;
-	size_t len = strlen(str);
-	unsigned int i;
-
-	for (i = 0; i < len; i++)
-	{
-		product *= str[i];
-	}
-
-	return (product);
-}
-
-/**
- * generate_key - Generates a key based on the username.
- * @username: Input username.
- * @key: Output key.
- *
- * This function generates a key based on the given username by performing
- * various calculations and lookups.
- */
-void generate_key(const char *username, char *key)
-{
-	unsigned int i;
-	size_t len, add;
-	char *l = "A-CHRDw87lNS0E9B2TibgpnMVys5XzvtOGJcYLU+4mjW6fxqZeF3Qa1rPhdKIouk";
-
-	len = strlen(username);
-
-	/* Perform XOR operation and select character from lookup */
-	key[0] = l[xor_operation(len, 59) & 63];
-
-	/* Calculate sum of character codes and select character from lookup */
-	add = calculate_sum(username);
-	key[1] = l[xor_operation(add, 79) & 63];
-
-	/* Calculate product of character codes and select character from lookup */
-	key[2] = l[xor_operation(calculate_product(username), 85) & 63];
-
-	/* Generate a random character from the lookup string */
-	key[3] = l[rand() & 63];
-
-	/* Calculate squared sum of character codes & select from lookup */
-	key[4] = l[xor_operation(calculate_sum(username) * calculate_sum(username),
-				239) & 63];
-
-	/* Generate a random character from the lookup */
-	key[5] = l[xor_operation(rand(), 229) & 63];
-}
-
-/**
- * main - Entry point of the program.
- * @argc: Number of command-line arguments.
- * @argv: Array of command-line arguments.
- *
- * Return: 0 on success, 1 on error.
+ * Return: 0 on success, 1 on error
  */
 int main(int argc, char *argv[])
 {
-	char key[7] = "      ";
+	unsigned int i, b;
+	size_t len, add;
+	char p[7] = "      ";
 
-	/* Check if the number of command-line arguments is correct */
 	if (argc != 2)
 	{
 		printf("Correct usage: ./keygen5 username\n");
 		return (1);
 	}
 
-	/* Generate the key based on the provided username */
-	generate_key(argv[1], key);
+	len = strlen(argv[1]);
+	p[0] = get_key_character(len, 59);
 
-	/* Print the generated key */
-	printf("%s\n", key);
+	for (i = 0, add = 0; i < len; i++)
+		add += argv[1][i];
+	p[1] = get_key_character(add, 79);
 
+	for (i = 0, b = 1; i < len; i++)
+		b *= argv[1][i];
+	p[2] = get_key_character(b, 85);
+
+	for (b = argv[1][0], i = 0; i < len; i++)
+	{
+		if ((char)b <= argv[1][i])
+			b = argv[1][i];
+	}
+
+	srand(b ^ 14);
+	p[3] = get_key_character(rand(), 63);
+
+	for (b = 0, i = 0; i < len; i++)
+		b += argv[1][i] * argv[1][i];
+	p[4] = get_key_character(b, 239);
+
+	for (b = 0, i = 0; (char)i < argv[1][0]; i++)
+		b = rand();
+	p[5] = get_key_character(b, 229);
+
+	printf("%s\n", p);
 	return (0);
 }
