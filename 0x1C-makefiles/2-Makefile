@@ -1,0 +1,20 @@
+# 2-Makefile
+# Makefile for building the 'school' executable using the specified compiler and source files.
+
+# Compiler variable
+CC = gcc
+
+# Source files variable
+SRC = main.c school.c
+
+# Object files variable
+OBJ = $(SRC:.c=.o)
+
+# Target executable name
+NAME = school
+
+# Rule for the 'all' target
+# This rule builds the 'school' executable by compiling the source files
+# and creating object files using the specified compiler.
+all: $(OBJ)
+	$(CC) $(OBJ) -o $(NAME)
