@@ -1,0 +1,40 @@
+# 4-Makefile
+# Complete Makefile with rules for building, cleaning, and recompiling the 'school' executable using the specified compiler, source files, and compiler flags.
+
+# Compiler variable
+CC = gcc
+
+# Source files variable
+SRC = main.c school.c
+
+# Object files variable
+OBJ = $(SRC:.c=.o)
+
+# Target executable name
+NAME = school
+
+# Command for removing files
+RM = rm -f
+
+# Compiler flags
+CFLAGS = -Wall -Werror -Wextra -pedantic
+
+# Rule for the 'all' target
+# This rule builds the 'school' executable by compiling the source files with the specified compiler flags
+# and creating object files using the specified compiler.
+all: $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+
+# Clean rule: remove Emacs and Vim temporary files and the generated 'school' executable
+clean:
+	$(RM) *~ $(NAME)
+
+# Oclean rule: remove the object files
+oclean:
+	$(RM) $(OBJ)
+
+# Fclean rule: remove Emacs and Vim temporary files, the 'school' executable, and the object files
+fclean: clean oclean
+
+# Re rule: forces recompilation of all source files by running the 'fclean' rule and then the 'all' rule
+re: fclean all
