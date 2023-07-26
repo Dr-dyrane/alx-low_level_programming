@@ -1,19 +1,16 @@
 # 1-Makefile
-# This Makefile is used to build the 'school' executable from the specified source files using the specified compiler.
+# Makefile for building the 'school'
+# executable using the specified compiler and source files.
 
 # Compiler variable
-CC := gcc
+CC = gcc
 
 # Source files variable
-SRC := main.c school.c
+SRC = main.c school.c
 
-# Target executable name
-TARGET := school
 
 # Rule for the 'all' target
-all:
-	$(CC) $(SRC) -o $(TARGET)
-
-# Clean rule: remove the generated executable
-clean:
-	rm -f $(TARGET)
+# This rule builds the 'school' executable by compiling the source files
+# using the specified compiler.
+all: $(SRC)
+	$(CC) $(SRC) -o school
