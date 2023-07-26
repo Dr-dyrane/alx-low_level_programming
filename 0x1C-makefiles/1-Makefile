@@ -11,38 +11,9 @@ SRC := main.c school.c
 TARGET := school
 
 # Rule for the 'all' target
-# This rule builds the 'school' executable by compiling the source files using the specified compiler.
 all:
 	$(CC) $(SRC) -o $(TARGET)
 
-# Makefile is a tool to automate building executables and managing dependencies. It uses rules
-# to define how the files are compiled and linked to generate the final executable.
-#
-# The 'all' rule is a special target that is executed when we run 'make' without any specific target.
-# In this Makefile, the 'all' rule is used to build the 'school' executable, which is the default target.
-
-# $(CC) is a variable that holds the name of the compiler to be used. In this case, it is 'gcc',
-# which is the GNU Compiler Collection for C programming.
-
-# $(SRC) is a variable that holds the names of the source files to be compiled. In this case,
-# we have 'main.c' and 'school.c' as the source files.
-
-# -o is a flag used with 'gcc' to specify the name of the output file (executable). Here, we specify
-# that the output file should be named 'school'.
-
-# To use this Makefile, navigate to the directory containing 'main.c' and 'school.c' files,
-# and then run the 'make' command with the '-f' option to specify the path to the Makefile:
-# make -f 1-Makefile
-
-# This will build the 'school' executable using the specified compiler 'gcc' and the specified source files.
-
-# The second time we run 'make -f 1-Makefile', it will check if any of the source files or the Makefile
-# has been modified since the last build. If there are no changes, 'make' will not recompile the files
-# as they are up to date.
-
-# To clean up and remove the generated 'school' executable, you can use 'make clean' with this Makefile:
-# make -f 1-Makefile clean
-
-# It's always a good practice to use a Makefile to automate the build process, especially in larger
-# projects with multiple source files and dependencies. Makefiles help ensure that only the necessary
-# files are recompiled, which saves time during development and testing.
+# Clean rule: remove the generated executable
+clean:
+	rm -f $(TARGET)
