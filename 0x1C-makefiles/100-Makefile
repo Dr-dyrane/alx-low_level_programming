@@ -1,20 +1,47 @@
+# 100-Makefile
+# Advanced Makefile for building the 'school' executable.
+
+# Compiler variable
 CC = gcc
+
+# Source files variable
 SRC = main.c school.c
+
+# Object files variable using substitution reference
 OBJ = $(SRC:.c=.o)
+
+# Target executable name
 NAME = school
+
+# Compiler flags variable
 CFLAGS = -Wall -Werror -Wextra -pedantic
 
+# PHONY targets: These targets are not actual files and always considered out-of-date
 .PHONY: all clean oclean fclean re
 
+# Rule for the 'all' target
+# This rule builds the 'school' executable by compiling the source files
+# using the specified compiler and flags. It depends on the 'm.h' header file
+# and the object files.
 all: m.h $(OBJ)
-	$(CC) $(OBJ) -o $(NAME)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
 
+# Rule for the 'clean' target
+# This rule removes Emacs and Vim temporary files and the 'school' executable.
 clean:
 	$(RM) *~ $(NAME)
 
+# Rule for the 'oclean' target
+# This rule deletes the object files.
 oclean:
 	$(RM) $(OBJ)
 
+# Rule for the 'fclean' target
+# This rule executes the 'clean' and 'oclean' rules, effectively removing all
+# Emacs and Vim temporary files and the object files.
 fclean: clean oclean
 
+# Rule for the 're' target
+# This rule depends on the 'fclean' and 'all' targets, forcing a full
+# recompilation of all source files and the executable.
 re: fclean all 
