@@ -23,8 +23,12 @@ CFLAGS = -Wall -Werror -Wextra -pedantic
 # This rule builds the 'school' executable by compiling the source files
 # using the specified compiler and flags. It depends on the 'm.h' header file
 # and the object files.
-all: m.h $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+all: $(NAME)
+
+# Rule for the 'school' target
+# This rule ensures the 'm.h' header file is present, and builds the 'school' executable.
+$(NAME): m.h $(OBJ)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
 
 # Rule for the 'clean' target
 # This rule removes Emacs and Vim temporary files and the 'school' executable.
