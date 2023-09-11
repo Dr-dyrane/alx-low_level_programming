@@ -15,7 +15,7 @@ int advanced_binary(int *array, size_t size, int value)
 	if (!array || size == 0)
 		return (-1); /*Handle edge cases: NULL array or empty array */
 
-	return advanced_binary_recursive(array, 0, size - 1, value);
+	return (advanced_binary_recursive(array, 0, size - 1, value));
 }
 
 /**
@@ -52,10 +52,10 @@ int advanced_binary_recursive(int *array, size_t low, size_t high, int value)
 		if (mid == 0 || array[mid - 1] != value)
 		/* Value found at the middle index, the first occurrence */
 			return mid;
-		return advanced_binary_recursive(array, low, mid, value);
+		return (advanced_binary_recursive(array, low, mid, value));
 	}
 	else if (array[mid] < value)
-		return advanced_binary_recursive(array, mid + 1, high, value);
+		return (advanced_binary_recursive(array, mid + 1, high, value));
 	else
-		return advanced_binary_recursive(array, low, mid - 1, value);
+		return (advanced_binary_recursive(array, low, mid - 1, value));
 }
