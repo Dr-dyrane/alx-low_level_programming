@@ -23,9 +23,9 @@ skiplist_t *linear_skip(skiplist_t *list, int value)
 		printf("Value checked at index[%lu] =[%d]\n", express->index, express->n);
 
 		/**
-         * If express node value is greater than or equal to the target value,
-         * or express lane reaches the end, perform linear search in this range
-         */
+		 * If express node value is greater than or equal to the target value,
+		 * or express lane reaches the end, perform linear search in this range
+		 */
 		if (express->n >= value || !express->express)
 		{
 			printf("Value found between indexes[%lu] and[%lu]\n",
@@ -50,6 +50,6 @@ skiplist_t *linear_skip(skiplist_t *list, int value)
 		current = express;
 		express = express->express;
 	}
-
 	return (NULL);
 }
+
