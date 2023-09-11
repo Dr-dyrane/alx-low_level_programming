@@ -51,7 +51,7 @@ int advanced_binary_recursive(int *array, size_t low, size_t high, int value)
 	{
 		if (mid == 0 || array[mid - 1] != value)
 		/* Value found at the middle index, the first occurrence */
-			return mid;
+			return (mid);
 		return (advanced_binary_recursive(array, low, mid, value));
 	}
 	else if (array[mid] < value)
