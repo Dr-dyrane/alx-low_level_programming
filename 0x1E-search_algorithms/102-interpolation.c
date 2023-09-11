@@ -15,7 +15,7 @@ int interpolation_search(int *array, size_t size, int value)
 	size_t l = 0; /* Initialize the low index to 0 */
 	size_t h = size - 1; /* Initialize the high index to the last element */
 	size_t p; /* Initialize the position variable */
-    double interpolation_factor;
+	double interpolation_factor;
 
 	if (!array || size == 0)
 		return (-1); /* Handle edge cases: NULL array or empty array */
@@ -23,10 +23,10 @@ int interpolation_search(int *array, size_t size, int value)
 	while (l <= h && value >= array[l] && value <= array[h])
 	{
 		/* Calculate the probe position using Interpolation formula */
-        interpolation_factor = (double)(h - l) / (array[h] - array[l]);
+		interpolation_factor = (double)(h - l) / (array[h] - array[l]);
 		p = l + (interpolation_factor * (value - array[l]));
 
-        /* Print the probed value */
+		/* Print the probed value */
 		printf("Value checked array[%lu] =[%d]\n", p, array[p]);
 
 		if (array[p] == value)
@@ -37,7 +37,8 @@ int interpolation_search(int *array, size_t size, int value)
 		else
 			h = p - 1; /* Adjust the search range to the left */
 	}
-    /* Value not found in the array */
+	/* Value not found in the array */
 	printf("Value checked array[%lu] is out of range\n", p);
 	return (-1);
 }
+
