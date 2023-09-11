@@ -28,9 +28,9 @@ int binary_search(int *array, size_t size, int value)
 		mid = (left + right) / 2; /*Calculate the middle index */
 
 		/*Check if the middle element is the target value */
-        if (array[mid] == value)
-			return (mid);
-        /*If the target value is greater, search the right half */
+	if (array[mid] == value)
+		return (mid);
+	/*If the target value is greater, search the right half */
 		else if (array[mid] < value)
 			left = mid + 1;
 		else /*If the target value is smaller, search the left half */
