@@ -6,7 +6,7 @@
 size_t minimum(size_t first, size_t second);
 
 /**
- * minimun - returns the minimum of two size_t values
+ * minimum - returns the minimum of two size_t values
  * @first: first value
  * @second: second value
  *
