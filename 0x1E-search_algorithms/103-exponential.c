@@ -1,35 +1,35 @@
 #include "search_algos.h"
 
-int binary_search_helper(int *array, int value,
+int bsh(int *array, int value,
 			 size_t low, size_t high);
-size_t min(size_t a, size_t b);
+size_t minimum(size_t a, size_t b);
 
 /**
- * min - returns the minimum of two size_t values
- * @a: first value
- * @b: second value
+ * minimum - returns the minimum of two size_t values
+ * @first: first value
+ * @second: second value
  *
- * Return: `a` if lower or equal to `b`, `b` otherwise
+ * Return: `first` if lower or equal to `second`, `second` otherwise
  */
-size_t min(size_t a, size_t b)
+size_t minimum(size_t first, size_t second)
 {
-	return (a <= b ? a : b);
+	return (first <= second ? first : second);
 }
 
 /**
- * binary_search_helper - searches for a value in an integer array using a
+ * bsh - searches for a value in an integer array using a
  * binary search algorithm, not guaranteed to return lowest index if `value`
  * appears twice in `array` (modified from `binary_search`)
  * @array: pointer to first element of array to seach
- * @value: value to search for
- * @low: starting index
- * @high: ending index
+ * @value: The value to search for
+ * @low: The low index of the search range
+ * @high: The high index of the search range
  *
  * Return: index containing `value`, or -1 if `value` not found or
  * `array` is NULL
  */
 
-int binary_search_helper(int *array, int value,
+int bsh(int *array, int value,
 			 size_t low, size_t high)
 {
 	size_t mid, i;
@@ -80,8 +80,9 @@ int exponential_search(int *array, size_t size, int value)
 	}
 
 	low = bound / 2;
-	high = min(bound, size - 1);
-	/* 'found' message generated even if array[high] < value */
+	high = minimum(bound, size - 1);
+
 	printf("Value found between indexes [%lu] and [%lu]\n", low, high);
-	return (binary_search_helper(array, value, low, high));
+
+	return (bsh(array, value, low, high));
 }

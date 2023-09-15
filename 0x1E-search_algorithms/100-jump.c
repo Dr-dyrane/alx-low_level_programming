@@ -10,7 +10,7 @@ size_t minimum(size_t first, size_t second);
  * @first: first value
  * @second: second value
  *
- * Return: `a` if lower or equal to `b`, `b` otherwise
+ * Return: `first` if lower or equal to `second`, `second` otherwise
  */
 size_t minimum(size_t first, size_t second)
 {
