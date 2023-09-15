@@ -12,38 +12,34 @@
  */
 int binary_search(int *array, size_t size, int value)
 {
-	/* Initialize left and right pointers */
-	int left = 0, right = size - 1;
-	int mid, i;
+	int low, mid, high;
+	int x;
 
-	/* Check for NULL array or empty array */
-	if (!array || size == 0)
-		return (-1);
-
-	/* Binary search loop */
-	while (left <= right)
+	if (array == NULL)
 	{
-		print_array(array, left, right);
-
-		mid = (left + right) / 2; /*Calculate the middle index */
-		
-		printf("Searching in array: ");
-		for (i = left; i <= right; i++)
-		{
-			printf("%i%s", array[i], i == right ? "\n" : ", ");
-		}
-
-		/*Check if the middle element is the target value */
-		if (array[mid] == value)
-			return (mid);
-		/*If the target value is greater, search the right half */
-		else if (array[mid] < value)
-			left = mid + 1;
-		else /*If the target value is smaller, search the left half */
-			right = mid - 1;
+		return (-1);
 	}
 
-	return (-1); /*Value not found in the array */
+	low = 0;
+	high = size - 1;
+
+	while (low <= high)
+	{
+		mid = (low + high) / 2;
+
+		printf("Searching in array: ");
+		for (x = low; x <= high; x++)
+			printf("%i%s", array[x], x == high ? "\n" : ", ");
+
+		if (array[mid] < value)
+			low = mid + 1;
+		else if (array[mid] > value)
+			high = mid - 1;
+		else
+			return (mid);
+	}
+
+	return (-1);
 }
 
 /**
