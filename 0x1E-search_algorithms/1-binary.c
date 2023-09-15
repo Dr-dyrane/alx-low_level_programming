@@ -41,16 +41,3 @@ int binary_search(int *array, size_t size, int value)
 
 	return (-1);
 }
-
-/**
- * print_array - prints the current subarray being searched
- * @array: Pointer to the first element of the array
- * @start: Starting index of the subarray
- * @end: Ending index of the subarray
- */
-void print_array(int *array, size_t start, size_t end)
-{
-	size_t i;
-
-
-}
