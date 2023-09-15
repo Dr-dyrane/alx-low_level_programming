@@ -53,7 +53,7 @@ void print_array(int *array, size_t start, size_t end)
 	printf("Searching in array: ");
 	for (i = start; i <= end; i++)
 	{
-		printf("%d", array[i]);
+		printf("%i%s", array[i]);
 		if (i < end)
 			printf(", ");
 		else
